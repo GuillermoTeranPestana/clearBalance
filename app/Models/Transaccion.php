@@ -13,7 +13,10 @@ class Transaccion extends Model
 
     protected $primaryKey = 'TransaccionID';
 
-    protected $fillable = ['CuentaID', 'CategoriaID', 'TipoTransaccion', 'Cantidad', 'Fecha', 'Descripcion'];
+    protected $fillable = ['CuentaID', 'CategoriaID', 'TipoTransaccion', 'Monto', 'Fecha', 'Descripcion'];
+
+    // Deshabilitar el manejo de timestamps
+    public $timestamps = false;
 
     // Relación N:1 con Cuenta
     public function cuenta()

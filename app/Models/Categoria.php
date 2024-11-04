@@ -15,6 +15,9 @@ class Categoria extends Model
 
     protected $fillable = ['Nombre', 'Tipo'];
 
+    // Deshabilitar el manejo de timestamps
+    public $timestamps = false;
+
     // Relación 1:N con Transacciones
     public function transacciones()
     {

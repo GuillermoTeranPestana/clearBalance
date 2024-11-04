@@ -18,6 +18,9 @@ class Cuenta extends Model
     // Campos permitidos para inserciones masivas
     protected $fillable = ['UsuarioID', 'Nombre', 'TipoCuenta', 'Saldo'];
 
+    // Deshabilitar el manejo de timestamps
+    public $timestamps = false;
+
     // Relación N:1 con Usuario
     public function usuario()
     {
