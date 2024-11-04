@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categorias', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('CategoriaID');                 // Clave primaria auto-incremental
+            $table->string('Nombre', 100);             // Nombre de la categoría, VARCHAR(100) y NOT NULL
+            
+            // Tipo de categoría como ENUM con valores 'ingreso' o 'gasto'
+            $table->enum('Tipo', ['ingreso', 'gasto'])->default('gasto'); // Obligatorio, sin valor por defecto
         });
     }
 
@@ -25,3 +28,4 @@ return new class extends Migration
         Schema::dropIfExists('categorias');
     }
 };
+
