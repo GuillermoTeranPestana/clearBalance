@@ -3,22 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transaccion; 
+use App\Models\Transaccion;
+use Carbon\Carbon; 
 
 class TransaccionController extends Controller
 {
 
-    public function index()
+    public function index($cuentaId)
     {
-        $transacciones = Transaccion::all();
+        // Obtener las transacciones de la cuenta
+        $transacciones = Transaccion::where('CuentaID', $cuentaId)
+            ->orderBy('Fecha')
+            ->get();
 
-        if ($transacciones->isEmpty()) {
-            return response()->json([
-                'message' => 'No se encontraron transacciones'
-            ], 404); 
+        // Crear un array para almacenar los datos formateados
+        $data = [];
+
+        // Recorrer las transacciones y formatear las fechas
+        foreach ($transacciones as $transaccion) {
+            $data[] = [
+                'fecha' => Carbon::parse($transaccion->Fecha)->format('Y-m-d'), // Formato deseado
+                'saldo' => $transaccion->Monto // Suponiendo que Monto es el saldo en ese momento
+            ];
         }
 
-        return response()->json($transacciones);
+        // Obtener el nombre de la cuenta
+        $nombreCuenta = $transacciones->first()->Cuenta->Nombre; // Asegúrate de que esto esté bien relacionado
+
+        // Devolver los datos como JSON
+        return response()->json(['nombreCuenta' => $nombreCuenta, 'data' => $data]);
     }
 
 

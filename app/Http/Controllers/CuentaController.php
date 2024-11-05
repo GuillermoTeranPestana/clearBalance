@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cuenta;
+use App\Models\Transaccion;
 
 class CuentaController extends Controller
 {
@@ -42,8 +43,23 @@ class CuentaController extends Controller
                 'Saldo' => 'required|numeric|min:0',
             ]);
     
+            // Crear la cuenta
             $cuenta = Cuenta::create($request->all());
+
+            // Aquí puedes establecer una categoría predeterminada
+            $categoriaId = 1; // Cambia esto al ID de la categoría que desees usar
     
+            // Crear la transacción inicial para la cuenta
+            Transaccion::create([
+                'CuentaID' => $cuenta->CuentaID,
+                'CategoriaID' => $categoriaId, // Usa la categoría predeterminada
+                'TipoTransaccion' => 'ingreso',
+                'Monto' => $cuenta->Saldo, // Usar el saldo inicial de la cuenta
+                'Fecha' => now(), // La fecha actual
+                'Descripcion' => 'Creación de cuenta' // Descripción de la transacción
+            ]);
+    
+            // Retornar la cuenta con un código de estado 201
             return response()->json($cuenta, 201);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['message' => 'Validación fallida', 'errors' => $e->validator->errors()], 422);
