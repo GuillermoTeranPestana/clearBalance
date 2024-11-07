@@ -1,0 +1,116 @@
+/* Estilos para la página de registro */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+/* Contenedor del formulario */
+.container {
+    background-color: #1c1c1c;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+/* Título principal de la página */
+.title {
+    font-size: 2.5rem;
+    color: #f0b90b;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los grupos de formulario (inputs) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #f0b90b;
+    outline: none;
+}
+
+/* Botón de envío */
+.button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    color: #121212;
+    background-color: #f0b90b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #d4a007;
+}
+
+/* Enlace de inicio de sesión */
+.login-link {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+}
+
+.login-link a {
+    color: #f0b90b;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los mensajes de error */
+.alert {
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.alert li {
+    margin-bottom: 5px;
+}
+
+.logo {
+    height: 300px;  /* Tamaño del logo más pequeño */
+    width: auto;
+}

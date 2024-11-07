@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Cuenta;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 class Grafico1Controller extends Controller
 {
+
+    public function getCuentasDelUsuario()
+    {
+        // Obtener el ID del usuario logueado
+        $usuarioId = Auth::id();
+
+        // Obtener las cuentas del usuario logueado
+        $cuentas = Cuenta::where('UsuarioID', $usuarioId)->get();
+
+        // Devolver las cuentas en formato JSON
+        return response()->json($cuentas);
+    }
+
     public function transacciones($cuentaId)
     {
         // Buscar la cuenta con las transacciones ordenadas por fecha
