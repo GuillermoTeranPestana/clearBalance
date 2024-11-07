@@ -59,12 +59,14 @@ class CuentaController extends Controller
                 'Descripcion' => 'Creación de cuenta' // Descripción de la transacción
             ]);
     
-            // Retornar la cuenta con un código de estado 201
-            return response()->json($cuenta, 201);
+             // Retornar la cuenta con un código de estado 201
+            return back()->with('success', 'Cuenta creada exitosamente.');
+
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['message' => 'Validación fallida', 'errors' => $e->validator->errors()], 422);
+        // Si hay errores de validación, los enviamos de vuelta con los errores
+        return back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Error al crear cuenta: ' . $e->getMessage()], 500);
+            return back()->with('error', 'Error al crear cuenta: ' . $e->getMessage());
         }
     }
 
