@@ -41,11 +41,6 @@
             @csrf
 
             <div class="form-group">
-                <label for="UsuarioID">Usuario ID</label>
-                <input type="text" name="UsuarioID" id="UsuarioID" class="form-control" value="{{ old('UsuarioID') }}" required>
-            </div>
-
-            <div class="form-group">
                 <label for="Nombre">Nombre de la Cuenta</label>
                 <input type="text" name="Nombre" id="Nombre" class="form-control" value="{{ old('Nombre') }}" required>
             </div>
@@ -75,8 +70,8 @@
         <!-- Formulario para transacciones -->
         <h1>Registrar Transacción</h1>
 
-                <!-- Mostrar los mensajes de error de validación para transacciones -->
-                @if ($errors->has('CuentaID') || $errors->has('CategoriaID') || $errors->has('TipoTransaccion') || $errors->has('Monto'))
+            <!-- Mostrar los mensajes de error de validación para transacciones -->
+        @if ($errors->has('CuentaID') || $errors->has('CategoriaID') || $errors->has('TipoTransaccion') || $errors->has('Monto'))
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -87,8 +82,8 @@
         @endif
     
 
-        <!-- Formulario de creación de transacción -->
-        <form action="{{ route('transacciones.store') }}" method="POST">
+         <!-- Formulario de creación de transacción -->
+         <form action="{{ route('transacciones.store') }}" method="POST">
             @csrf
 
             <div class="form-group">

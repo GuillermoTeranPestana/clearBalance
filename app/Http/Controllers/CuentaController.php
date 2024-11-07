@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cuenta;
 use App\Models\Transaccion;
+use Illuminate\Support\Facades\Auth;
 
 class CuentaController extends Controller
 {
@@ -36,19 +37,24 @@ class CuentaController extends Controller
     public function store(Request $request)
     {
         try {
+            // Validación de los campos del formulario
             $request->validate([
-                'UsuarioID' => 'required|exists:usuarios,UsuarioID',
                 'Nombre' => 'required|string|max:100',
                 'TipoCuenta' => 'required|in:ahorros,corriente,tarjeta de crédito,otro',
                 'Saldo' => 'required|numeric|min:0',
             ]);
+        
+            // Crear la cuenta, asignando el UsuarioID automáticamente con el ID del usuario logueado
+            $cuenta = Cuenta::create([
+                'Nombre' => $request->Nombre,
+                'TipoCuenta' => $request->TipoCuenta,
+                'Saldo' => $request->Saldo,
+                'UsuarioID' => Auth::id(), // Asignar automáticamente el UsuarioID
+            ]);
     
-            // Crear la cuenta
-            $cuenta = Cuenta::create($request->all());
-
-            // Aquí puedes establecer una categoría predeterminada
+            // Aquí puedes establecer una categoría predeterminada para la transacción inicial
             $categoriaId = 1; // Cambia esto al ID de la categoría que desees usar
-    
+        
             // Crear la transacción inicial para la cuenta
             Transaccion::create([
                 'CuentaID' => $cuenta->CuentaID,
@@ -58,14 +64,15 @@ class CuentaController extends Controller
                 'Fecha' => now(), // La fecha actual
                 'Descripcion' => 'Creación de cuenta' // Descripción de la transacción
             ]);
-    
-             // Retornar la cuenta con un código de estado 201
+        
+            // Retornar la cuenta con un código de estado 201
             return back()->with('success', 'Cuenta creada exitosamente.');
-
+            
         } catch (\Illuminate\Validation\ValidationException $e) {
-        // Si hay errores de validación, los enviamos de vuelta con los errores
-        return back()->withErrors($e->validator->errors())->withInput();
+            // Si hay errores de validación, los enviamos de vuelta con los errores
+            return back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
+            // Si ocurre un error inesperado, capturarlo
             return back()->with('error', 'Error al crear cuenta: ' . $e->getMessage());
         }
     }

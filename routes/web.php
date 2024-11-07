@@ -46,6 +46,9 @@ Route::post('/cuentas', [CuentaController::class, 'store'])->name('cuentas.store
 
 // Ruta para almacenar la transacción
 Route::post('/transacciones', [TransaccionController::class, 'store'])->name('transacciones.store');
+Route::get('/transacciones/create', [TransaccionController::class, 'create'])
+    ->name('transacciones.create')
+    ->middleware('auth');
 
 // Ruta para la página de movimientos de cuentas
 Route::get('/movimientos', [MovimientosController::class, 'index'])->name('movimientos.index');
@@ -61,7 +64,7 @@ Route::get('/logout', function () {
 
 
 //Ruta para mostrar las cuentas 
-Route::get('/cuentas/por-usuario', [Grafico2Controller::class, 'cuentasPorUsuario']);
+Route::get('/cuentas/por-usuario', [Grafico2Controller::class, 'cuentasPorUsuario'])->middleware('auth');
 Route::get('/cuentas/{cuenta}/transacciones', [Grafico1Controller::class, 'transacciones']);
 Route::get('/cuentas/{cuentaId}', [Grafico1Controller::class, 'showCuenta']);
 

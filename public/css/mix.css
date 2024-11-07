@@ -146,15 +146,25 @@ input:focus {
     text-decoration: underline;
 }
 
-/* Estilo para los mensajes de error */
-.alert {
-    background-color: #ff4d4d;
-    color: #fff;
-    padding: 10px;
+/* Estilo para el mensaje de éxito */
+.alert-success {
+    background-color: #28a745; /* Verde de éxito */
+    color: white; /* Texto en blanco */
+    padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
+    font-size: 16px;
 }
 
+/* Estilo para el mensaje de error */
+.alert-danger {
+    background-color: #dc3545; /* Rojo de error */
+    color: white; /* Texto en blanco */
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
 .alert ul {
     list-style-type: none;
     padding: 0;

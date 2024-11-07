@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaccion;
 use Carbon\Carbon; 
+use App\Models\Cuenta;
+use Illuminate\Support\Facades\Auth;
 
 class TransaccionController extends Controller
 {
